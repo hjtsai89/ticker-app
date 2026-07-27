@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ticker — Multi-Market Stock Watch</title>
+<meta name="theme-color" content="#0B1220">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">Ticker</span>
+  </div>
+  <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙</button>
+</header>
+
+<main>
+  <section class="add-panel">
+    <div class="add-row">
+      <select id="marketSelect" aria-label="Market">
+        <option value="TW">Taiwan (TWSE/TPEx)</option>
+        <option value="US">US (NYSE/Nasdaq)</option>
+        <!-- China (Shanghai/Shenzhen) temporarily disabled -->
+        <!-- <option value="SH">China — Shanghai</option> -->
+        <!-- <option value="SZ">China — Shenzhen</option> -->
+      </select>
+      <input id="codeInput" type="text" inputmode="text" placeholder="Stock code, e.g. 2330, AAPL, 600519, 000001" autocomplete="off">
+      <button id="addBtn" class="primary-btn">Add</button>
+    </div>
+    <p id="addError" class="error-text" hidden></p>
+  </section>
+
+  <section class="toolbar">
+    <label class="autorefresh">
+      <input type="checkbox" id="autoRefresh" checked>
+      Auto-refresh every 20s
+    </label>
+    <button id="refreshAllBtn" class="ghost-btn">Refresh now</button>
+    <span id="lastUpdated" class="last-updated"></span>
+  </section>
+
+  <section id="watchlist" class="watchlist" aria-live="polite">
+    <div class="empty-state" id="emptyState">
+      <p>No stocks yet.</p>
+      <p class="empty-sub">Pick a market above, type a code, and tap Add.</p>
+    </div>
+  </section>
+</main>
+
+<div id="settingsOverlay" class="overlay" hidden>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2>Settings</h2>
+      <button id="closeSettings" class="icon-btn" aria-label="Close">✕</button>
+    </div>
+
+    <div class="field">
+      <label for="finnhubKey">Finnhub API key <span class="hint">(needed for US stocks — free, no card)</span></label>
+      <input id="finnhubKey" type="text" placeholder="Paste your free Finnhub API key">
+      <a href="https://finnhub.io/register" target="_blank" rel="noopener" class="link-out">Get a free key at finnhub.io →</a>
+    </div>
+
+    <div class="field">
+      <label for="proxyUrl">CORS proxy prefix <span class="hint">(China market support is currently disabled — this is only used if you enable the Taiwan proxy fallback below)</span></label>
+      <input id="proxyUrl" type="text" placeholder="https://api.allorigins.win/raw?url=">
+      <p class="hint">China (Shanghai/Shenzhen) is temporarily turned off in this build while we get Taiwan and US working reliably first.</p>
+    </div>
+
+    <div class="field">
+      <label for="twProxyToggle">
+        <input type="checkbox" id="twProxyToggle">
+        Also use proxy for Taiwan data (enable only if Taiwan quotes fail to load directly)
+      </label>
+    </div>
+
+    <button id="saveSettings" class="primary-btn full-width">Save</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
