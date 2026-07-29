@@ -26,11 +26,8 @@
       <select id="marketSelect" aria-label="Market">
         <option value="TW">Taiwan (TWSE/TPEx)</option>
         <option value="US">US (NYSE/Nasdaq)</option>
-        <!-- China (Shanghai/Shenzhen) temporarily disabled -->
-        <!-- <option value="SH">China — Shanghai</option> -->
-        <!-- <option value="SZ">China — Shenzhen</option> -->
       </select>
-      <input id="codeInput" type="text" inputmode="text" placeholder="Stock code, e.g. 2330, AAPL, 600519, 000001" autocomplete="off">
+      <input id="codeInput" type="text" inputmode="text" placeholder="Stock code, e.g. 2330, AAPL" autocomplete="off">
       <button id="addBtn" class="primary-btn">Add</button>
     </div>
     <p id="addError" class="error-text" hidden></p>
@@ -67,9 +64,9 @@
     </div>
 
     <div class="field">
-      <label for="proxyUrl">CORS proxy prefix <span class="hint">(China market support is currently disabled — this is only used if you enable the Taiwan proxy fallback below)</span></label>
+      <label for="proxyUrl">CORS proxy prefix</label>
       <input id="proxyUrl" type="text" placeholder="https://api.allorigins.win/raw?url=">
-      <p class="hint">China (Shanghai/Shenzhen) is temporarily turned off in this build while we get Taiwan and US working reliably first.</p>
+      <p class="hint">Only needed if Taiwan quotes fail to load directly (see toggle below).</p>
     </div>
 
     <div class="field">
